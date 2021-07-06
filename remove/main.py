@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt 
+import matplotlib.image as mpimg
 from seam_carving import SeamCarver
 def object_removal(filename_input, filename_output, filename_mask):
     obj = SeamCarver(filename_input, 0, 0, object_mask=filename_mask)
@@ -33,7 +35,13 @@ while(1):
     cv2.imshow(window_name,img)
     k = cv2.waitKey(1) & 0xFF
     if k == 13:
+        print('Removing!!!!')
         object_removal(img, "removed.jpg", cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY))
+        img = cv2.imread("removed.jpg")
+        mageBGR = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        mgplot = plt.imshow(mageBGR)
+
+        plt.show()
         break
 
 cv2.destroyAllWindows()

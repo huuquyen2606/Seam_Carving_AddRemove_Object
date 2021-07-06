@@ -1,5 +1,6 @@
 import cv2
-
+import matplotlib.pyplot as plt 
+import matplotlib.image as mpimg
 from paint_mask import MaskPainter
 from move_mask import MaskMover
 from poisson_image_editing import poisson_edit
@@ -83,5 +84,9 @@ if __name__ == '__main__':
     
     cv2.imwrite(path.join(path.dirname(args["source"]), 'target_result.png'), 
                 poisson_blend_result)
-    
+    img = cv2.imread("target_result.png")
+    mageBGR = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    mgplot = plt.imshow(mageBGR)
+
+    plt.show()
     print('Done.\n')
